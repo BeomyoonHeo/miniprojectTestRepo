@@ -11,9 +11,6 @@ jobs:
     if: ${{ github.event.pull_request.merged }}
     runs-on: ubuntu-20.04
     steps:
-      - name: ClasspathTest
-        run: echo $CLASSPATH
-        shell: bash
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up JDK 11
