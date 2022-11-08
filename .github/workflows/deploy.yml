@@ -19,8 +19,9 @@ jobs:
           java-version: 11
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
-        run: echo $CLASSPATH
         shell: bash
+      - name: test
+        run: echo $CLASSPATH
       - name: Build with Gradle
         run: ./gradlew clean build
         shell: bash
