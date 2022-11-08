@@ -7,18 +7,14 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mariadb://${rds.hostname}:${rds.port}/${rds.db.name}
+    url: jdbc:mariadb://miniproject.cyfsncxef8dy.ap-northeast-2.rds.amazonaws.com:3306/jobs
     driver-class-name: org.mariadb.jdbc.Driver
-    username: ${rds.username}
-    password: ${rds.password}
+    username: jobsmatch
+    password: Qwer1234!
 
   session:
     store-type: none
 
-  redis:
-    host: localhost
-    port: 6379
-    
   
   # jpa:
   #   open-in-view: false
