@@ -17,8 +17,6 @@ import site.metacoding.miniproject.domain.users.Users;
 import site.metacoding.miniproject.domain.users.UsersDao;
 import site.metacoding.miniproject.dto.like.LikeReqDto.PersonalLikeReqDto;
 import site.metacoding.miniproject.dto.like.LikeRespDto.PersonalLikeRespDto;
-import site.metacoding.miniproject.dto.user.UserRespDto.SignCompanyDto;
-import site.metacoding.miniproject.dto.user.UserRespDto.SignedDto;
 import site.metacoding.miniproject.utill.AlarmEnum;
 
 @RequiredArgsConstructor

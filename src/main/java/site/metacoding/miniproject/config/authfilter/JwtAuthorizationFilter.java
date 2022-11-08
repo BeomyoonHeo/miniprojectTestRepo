@@ -16,14 +16,12 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject.dto.user.UserRespDto.SignedDto;
 import site.metacoding.miniproject.exception.ApiException;
-import site.metacoding.miniproject.utill.SecretKey;
 import site.metacoding.miniproject.utill.JWTToken.CookieForToken;
 import site.metacoding.miniproject.utill.JWTToken.TokenToSinedDto;
+import site.metacoding.miniproject.utill.SecretKey;
 
-@Slf4j
 public class JwtAuthorizationFilter implements Filter {
 
     @Override
@@ -33,7 +31,7 @@ public class JwtAuthorizationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String tokenForCookie = CookieForToken.cookieToToken(req.getCookies());
-        
+
         if (tokenForCookie == null) {
             throw new ApiException("쿠키값 없음 또는 만료된 쿠키 - 로그인 요망");
         }
