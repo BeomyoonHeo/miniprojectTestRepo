@@ -68,7 +68,7 @@ public class CompanyApiControllerTest {
     // 채용공고업데이트
     @Test
 
-    @Sql({ "classpath:truncate.sql", "classpath:testsql/insertjobpostingboard.sql" })
+    @Sql({ "classpath:truncate.sql", "classpath:testsql/insertjobpostingBoard.sql" })
     public void updatejobPostingBoard_test() throws Exception {
 
         // given
@@ -109,7 +109,7 @@ public class CompanyApiControllerTest {
     // 채용공고 목록보기
     @Test
 
-    @Sql({ "classpath:truncate.sql", "classpath:testsql/insertjobpostingboard.sql" })
+    @Sql({ "classpath:truncate.sql", "classpath:testsql/insertjobpostingBoard.sql" })
     public void jobPostingBoardList_test() throws Exception {
         // given
 
