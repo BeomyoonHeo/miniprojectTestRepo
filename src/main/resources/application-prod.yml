@@ -9,8 +9,8 @@ spring:
   datasource:
     url: jdbc:mariadb://${rds.hostname}:${rds.port}/${rds.db.name} 
     driver-class-name: org.mariadb.jdbc.Driver
-    username: jobsmatch
-    password: Qwer1234!
+    username: ${rds.username}
+    password: ${rds.password}
 
   session:
     store-type: none
