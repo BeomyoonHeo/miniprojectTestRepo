@@ -8,7 +8,6 @@ import org.springframework.util.ObjectUtils;
 
 import site.metacoding.miniproject.dto.company.CompanyReqDto.CompanyJoinDto;
 import site.metacoding.miniproject.dto.company.CompanyReqDto.CompanyUpdateReqDto;
-import site.metacoding.miniproject.dto.jobpostingboard.JobPostingBoardReqDto.JobPostingBoardInsertReqDto;
 import site.metacoding.miniproject.dto.personal.PersonalReqDto.PersonalJoinDto;
 import site.metacoding.miniproject.dto.personal.PersonalReqDto.PersonalUpdatReqDto;
 import site.metacoding.miniproject.exception.NormalException;

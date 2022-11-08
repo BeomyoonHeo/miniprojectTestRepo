@@ -25,8 +25,6 @@ import site.metacoding.miniproject.domain.resumes.Resumes;
 import site.metacoding.miniproject.domain.resumes.ResumesDao;
 import site.metacoding.miniproject.domain.users.Users;
 import site.metacoding.miniproject.domain.users.UsersDao;
-import site.metacoding.miniproject.dto.company.CompanyRespDto.CompanyAddressRespDto;
-import site.metacoding.miniproject.dto.company.CompanyRespDto.CompanyDetailRespDto;
 import site.metacoding.miniproject.dto.company.CompanyRespDto.CompanyDetailWithPerRespDto;
 import site.metacoding.miniproject.dto.jobpostingboard.JobPostingBoardRespDto.JobPostingDetailWithPersonalRespDto;
 import site.metacoding.miniproject.dto.personal.PersonalReqDto.PersonalUpdatReqDto;

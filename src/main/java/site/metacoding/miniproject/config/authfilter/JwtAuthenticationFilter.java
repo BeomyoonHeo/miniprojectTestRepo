@@ -10,12 +10,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject.exception.ApiException;
 import site.metacoding.miniproject.utill.JWTToken.CookieForToken;
 import site.metacoding.miniproject.utill.JWTToken.TokenVerificationForCookie;
 
-@Slf4j
 public class JwtAuthenticationFilter implements Filter {
 
     @Override
@@ -33,8 +31,8 @@ public class JwtAuthenticationFilter implements Filter {
         if (tokenVerification.Verification(token)) {
             throw new ApiException("만료되지않은 토큰값이 존재합니다");
         }
-        
-        //이터레이터 값 확인
+
+        // 이터레이터 값 확인
         // req.getAttributeNames().asIterator()
         // .forEachRemaining(attribute -> log.debug("디버그 : " + attribute + " : " +
         // req.getAttribute(attribute)));

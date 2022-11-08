@@ -1,13 +1,12 @@
 package site.metacoding.miniproject.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import java.sql.Timestamp;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,10 +15,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.mock.web.MockCookie;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -27,9 +24,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.jsonpath.JsonPath;
 
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject.dto.company.CompanyReqDto.CompanyUpdateReqDto;
 import site.metacoding.miniproject.dto.jobpostingboard.JobPostingBoardReqDto.JobPostingBoardInsertReqDto;
 import site.metacoding.miniproject.dto.jobpostingboard.JobPostingBoardReqDto.JobPostingBoardUpdateReqDto;
@@ -37,7 +32,6 @@ import site.metacoding.miniproject.dto.user.UserRespDto.SignCompanyDto;
 import site.metacoding.miniproject.dto.user.UserRespDto.SignedDto;
 import site.metacoding.miniproject.utill.JWTToken.CreateJWTToken;
 
-@Slf4j
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
@@ -151,7 +145,6 @@ public class CompanyApiControllerTest {
         jobPostingBoardInsertReqDto.setFiveYearOver(false);
 
         String body = om.writeValueAsString(jobPostingBoardInsertReqDto);
-        log.debug("mytest : " + body);
         // when
         ResultActions resultActions = mvc.perform(post("/s/api/jobpostingboard/insert")
                 .content(body)

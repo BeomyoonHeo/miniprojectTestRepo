@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject.dto.ResponseDto;
 import site.metacoding.miniproject.dto.company.CompanyReqDto.CompanyJoinDto;
 import site.metacoding.miniproject.dto.personal.PersonalReqDto.PersonalJoinDto;
@@ -27,7 +26,6 @@ import site.metacoding.miniproject.utill.JWTToken.CreateJWTToken;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class UsersController {
 	private final UsersService userService;
 	private final HttpSession session;

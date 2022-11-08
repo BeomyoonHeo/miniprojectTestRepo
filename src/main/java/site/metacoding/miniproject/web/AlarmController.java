@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject.dto.ResponseDto;
 import site.metacoding.miniproject.dto.alarm.AlarmReqDto.AlarmReqDtoToDelete;
 import site.metacoding.miniproject.dto.alarm.AlarmReqDto.AlarmReqListDtoToCheck;
@@ -23,7 +22,6 @@ import site.metacoding.miniproject.service.users.UsersService;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class AlarmController {
 	// sendTo사용시 destinationValue 적용 받을라면 Spring 4.2부터 가능 - simpleMessagingTemplate을
 	// 사용해서 DestinationValue를 대체한다.
