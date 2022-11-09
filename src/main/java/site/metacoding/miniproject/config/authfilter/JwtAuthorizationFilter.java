@@ -23,10 +23,6 @@ import site.metacoding.miniproject.utill.JWTToken.TokenToSinedDto;
 import site.metacoding.miniproject.utill.SecretKey;
 public class JwtAuthorizationFilter implements Filter {
 
-    DecodedJWT decodedJWT;
-    String tokenForHeader = null;
-    String tokenForCookie = null;
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -34,16 +30,14 @@ public class JwtAuthorizationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        tokenForCookie = CookieForToken.cookieToToken(req.getCookies());
+        String tokenForCookie = CookieForToken.cookieToToken(req.getCookies());
 
-        if (decodedJWT == null) {
+        if (tokenForCookie == null) {
             throw new ApiException("인증 필요");
         }
 
-        decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
+        DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
         .verify(tokenForCookie);
-
-
 
         // map 형식으로 저장되어있는 토큰값을 map형식으로 가져온다.
         Map<String, Object> getSigned = decodedJWT.getClaim("sigendDto").asMap();
