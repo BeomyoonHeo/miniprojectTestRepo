@@ -49,15 +49,6 @@ public class JWTToken {
             return jwtToken;
         }
 
-
-        public static String invaildToken() {
-
-            String jwtToken = JWT.create()
-                    .withExpiresAt(expire)
-                    .sign(Algorithm.HMAC512(SecretKey.SECRETKEY.key()));
-
-            return jwtToken;
-        }
     }
 
     public static class CookieForToken {
@@ -83,17 +74,6 @@ public class JWTToken {
                     token = cookie.getValue();
             }
             return token;
-        }
-
-    }
-    public static class HeaderForToken {
-
-        public static String HeaderToToken(String header) {
-
-            header = header.replace("Bearer ", "");
-            header = header.trim();
-
-            return header;
         }
 
     }

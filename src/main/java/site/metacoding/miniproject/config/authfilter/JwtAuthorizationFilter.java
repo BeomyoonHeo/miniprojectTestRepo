@@ -16,14 +16,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject.dto.user.UserRespDto.SignedDto;
 import site.metacoding.miniproject.exception.ApiException;
 import site.metacoding.miniproject.utill.JWTToken.CookieForToken;
-import site.metacoding.miniproject.utill.JWTToken.HeaderForToken;
 import site.metacoding.miniproject.utill.JWTToken.TokenToSinedDto;
 import site.metacoding.miniproject.utill.SecretKey;
-@Slf4j
 public class JwtAuthorizationFilter implements Filter {
 
     DecodedJWT decodedJWT;
@@ -39,29 +36,13 @@ public class JwtAuthorizationFilter implements Filter {
 
         tokenForCookie = CookieForToken.cookieToToken(req.getCookies());
 
-
-        if (req.getHeader("Authorization") != null) {
-            tokenForHeader = HeaderForToken.HeaderToToken(req.getHeader("Authorization"));
-        }
-        
-
-        if (tokenForCookie != null) {
-            decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
-                    .verify(tokenForCookie);
-        }
-
-        if (tokenForHeader != null) {
-            decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
-                    .verify(tokenForHeader);
-        }
-
-        log.info("debug: cookie" + tokenForCookie);
-        log.info("debug :  header" + tokenForHeader);
-
         if (decodedJWT == null) {
             throw new ApiException("인증 필요");
         }
-        
+
+        decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
+        .verify(tokenForCookie);
+
 
 
         // map 형식으로 저장되어있는 토큰값을 map형식으로 가져온다.

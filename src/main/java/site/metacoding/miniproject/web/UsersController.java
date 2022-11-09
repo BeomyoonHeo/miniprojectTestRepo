@@ -54,12 +54,7 @@ public class UsersController {
 		Cookie cookie = new Cookie("Authorization", null);
 		cookie.setMaxAge(0);
 		cookie.setPath("/");
-		
-
-		String tokenInvalid = CreateJWTToken.invaildToken();
-
 		resp.addCookie(cookie);
-
 
 		session.removeAttribute("principal");
 
