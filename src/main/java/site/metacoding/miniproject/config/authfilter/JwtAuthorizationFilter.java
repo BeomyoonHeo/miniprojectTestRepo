@@ -16,13 +16,19 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+import lombok.extern.slf4j.Slf4j;
 import site.metacoding.miniproject.dto.user.UserRespDto.SignedDto;
 import site.metacoding.miniproject.exception.ApiException;
 import site.metacoding.miniproject.utill.JWTToken.CookieForToken;
+import site.metacoding.miniproject.utill.JWTToken.HeaderForToken;
 import site.metacoding.miniproject.utill.JWTToken.TokenToSinedDto;
 import site.metacoding.miniproject.utill.SecretKey;
-
+@Slf4j
 public class JwtAuthorizationFilter implements Filter {
+
+    DecodedJWT decodedJWT;
+    String tokenForHeader = null;
+    String tokenForCookie = null;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -30,14 +36,33 @@ public class JwtAuthorizationFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        String tokenForCookie = CookieForToken.cookieToToken(req.getCookies());
 
-        if (tokenForCookie == null) {
-            throw new ApiException("쿠키값 없음 또는 만료된 쿠키 - 로그인 요망");
+        tokenForCookie = CookieForToken.cookieToToken(req.getCookies());
+
+
+        if (req.getHeader("Authorization") != null) {
+            tokenForHeader = HeaderForToken.HeaderToToken(req.getHeader("Authorization"));
+        }
+        
+
+        if (tokenForCookie != null) {
+            decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
+                    .verify(tokenForCookie);
         }
 
-        DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
-                .verify(tokenForCookie);
+        if (tokenForHeader != null) {
+            decodedJWT = JWT.require(Algorithm.HMAC512(SecretKey.SECRETKEY.key())).build()
+                    .verify(tokenForHeader);
+        }
+
+        log.info("디버그 :  쿠키값 존재" + tokenForCookie);
+        log.info("디버그 :  헤더값 존재" + tokenForHeader);
+
+        if (decodedJWT == null) {
+            throw new ApiException("인증 필요");
+        }
+        
+
 
         // map 형식으로 저장되어있는 토큰값을 map형식으로 가져온다.
         Map<String, Object> getSigned = decodedJWT.getClaim("sigendDto").asMap();

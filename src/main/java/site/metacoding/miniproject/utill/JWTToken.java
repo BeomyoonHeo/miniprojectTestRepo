@@ -20,6 +20,7 @@ public class JWTToken {
     public static class CreateJWTToken {
 
         static Date expire = new Date(System.currentTimeMillis() + (1000 * 60 * 60)); // 1시간 토큰값
+        static Date invalidexpire = new Date(System.currentTimeMillis() + (0)); // 1시간 토큰값
 
         public static String createToken(SignedDto<?> signedDto) {
 
@@ -43,6 +44,16 @@ public class JWTToken {
                     .withSubject("userinfo")
                     .withExpiresAt(expire)
                     .withClaim("sigendDto", map)
+                    .sign(Algorithm.HMAC512(SecretKey.SECRETKEY.key()));
+
+            return jwtToken;
+        }
+
+
+        public static String invaildToken() {
+
+            String jwtToken = JWT.create()
+                    .withExpiresAt(expire)
                     .sign(Algorithm.HMAC512(SecretKey.SECRETKEY.key()));
 
             return jwtToken;
@@ -75,6 +86,18 @@ public class JWTToken {
         }
 
     }
+    public static class HeaderForToken {
+
+        public static String HeaderToToken(String header) {
+
+            header = header.replace("Bearer ", "");
+            header = header.trim();
+
+            return header;
+        }
+
+    }
+
 
     public static class TokenVerificationForCookie {
 
