@@ -55,8 +55,8 @@ public class JwtAuthorizationFilter implements Filter {
                     .verify(tokenForHeader);
         }
 
-        log.info("디버그 :  쿠키값 존재" + tokenForCookie);
-        log.info("디버그 :  헤더값 존재" + tokenForHeader);
+        log.info("debug: cookie" + tokenForCookie);
+        log.info("debug :  header" + tokenForHeader);
 
         if (decodedJWT == null) {
             throw new ApiException("인증 필요");
